@@ -15,29 +15,48 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
   const [searchText, setSearchText] = useState('');
+  const [searchedResults, setSearchedResults] = useState(null);
+  const [searchTimeout, setSearchTimeout] = useState(null);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch('https://localhost:8080/api/v1/posts', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+  const fetchPosts = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('http://localhost:8080/api/v1/post', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
-        if (response.ok) {
-          const result = await response.json();
-          setAllPosts(result.data.reverse());
-        }
-      } catch (error) {
-        alert(error);
-      } finally {
-        setLoading(false);
+      if (response.ok) {
+        const result = await response.json();
+        setAllPosts(result.data.reverse());
       }
-    };
+    } catch (error) {
+      alert(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchPosts();
   }, []);
+
+  const handleSearchChange = (e) => {
+    clearTimeout(searchTimeout);
+    setSearchText(e.target.value);
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResults = allPosts.filter(
+          (item) =>
+            item.name.toLowerCase().includes(searchText.toLowerCase()) ||
+            item.prompt.toLowerCase().includes(searchText.toLowerCase())
+        );
+
+        setSearchedResults(searchResults);
+      }, 500)
+    );
+  };
 
   return (
     <section className='max-w-7xl mx-auto'>
@@ -52,7 +71,14 @@ const Home = () => {
       </div>
 
       <div className='mt-16'>
-        <FormField />
+        <FormField
+          labelName='Search posts'
+          type='text'
+          name='text'
+          placeholder='Search Posts'
+          value={searchText}
+          handleChange={handleSearchChange}
+        />
       </div>
 
       <div className='mt-10'>
@@ -68,9 +94,9 @@ const Home = () => {
                 <span className='text-[#222328]'>{searchText}</span>"
               </h2>
             )}
-            <div className='grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1'>
+            <div className='grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3'>
               {searchText ? (
-                <RenderCards data={[]} title='No results found' />
+                <RenderCards data={searchedResults} title='No results found' />
               ) : (
                 <RenderCards data={allPosts} title='No posts found' />
               )}

@@ -19,7 +19,7 @@ const CreatePost = () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
-        const response = await fetch('https://localhost:8080/api/v1/dalle', {
+        const response = await fetch('http://localhost:8080/api/v1/dalle', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -45,7 +45,7 @@ const CreatePost = () => {
       setLoading(true);
 
       try {
-        const response = await fetch('https://localhost:8080/api/v1/posts', {
+        const response = await fetch('http://localhost:8080/api/v1/post', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -84,20 +84,20 @@ const CreatePost = () => {
       <form className='mt-16 max-w-3xl' onSubmit={handleSubmit}>
         <div className='flex flex-col gap-5'>
           <FormField
-            label='Your Name'
+            labelName='Your Name'
             type='text'
             name='name'
             placeholder='Enter your name'
             value={form.name}
-            onChange={handleChange}
+            handleChange={handleChange}
           />
           <FormField
-            label='Prompt'
+            labelName='Prompt'
             type='text'
             name='prompt'
             placeholder='An oil painting portrait of a kangal dog wearing medieval royal robes and an ornate crown smoking smoking pipe'
             value={form.prompt}
-            onChange={handleChange}
+            handleChange={handleChange}
             isSurpriseMe
             handleSurpriseMe={handleSurpriseMe}
           />
@@ -105,7 +105,7 @@ const CreatePost = () => {
             {form.photo ? (
               <img
                 src={form.photo}
-                alt={photo.prompt}
+                alt={form.prompt}
                 className='w-full h-full object-contain'
               />
             ) : (
