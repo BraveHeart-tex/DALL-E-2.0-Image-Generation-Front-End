@@ -40,7 +40,7 @@ git clone https://github.com/BraveHeart-tex/DALL-E-2.0-Image-Generation-Back-End
 ```
 
 
-4. Create a .env file in the root directory with the following variables. .env file should be created outside of both the server and the client folders.
+4. Create a .env file in the root directory with the following variables. .env file should be created in the root of the server folder.
 
 ```
 MONGODB_URL="YOUR URL"
