@@ -24,16 +24,23 @@ This application utilizes OpenAI's DALL-E 2 API to generate images based on user
 1. Clone the repository
 
 ```
-git clone https://github.com/YOUR_USERNAME/AI-image-generation
+git clone https://github.com/BraveHeart-tex/DALL-E-2.0-Image-Generation-Front-End
 ```
 
-2. Install dependencies
+2. Inside the client folder, install dependencies
 
 ```
 npm install or yarn add
 ```
 
-3.Create a .env file in the root directory with the following variables
+3. Clone the backend repo
+
+```
+git clone https://github.com/BraveHeart-tex/DALL-E-2.0-Image-Generation-Back-End
+```
+
+
+4.Create a .env file in the root directory with the following variables. .env file should be created outside of both the server and the client folders.
 
 ```
 MONGO_URI=YOUR_MONGO_URI
@@ -41,10 +48,16 @@ CLOUDINARY_URL=YOUR_CLOUDINARY_URL
 OPENAI_API_KEY=YOUR_OPENAI_API_KEY
 ```
 
-4. Start the application
+5. Start the application (in the server)
 
 ```
 npm start
+```
+
+6. Start the application (in the client)
+
+```
+npm run dev
 ```
 
 ## Built With
