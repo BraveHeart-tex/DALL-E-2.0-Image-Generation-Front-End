@@ -33,7 +33,7 @@ git clone https://github.com/BraveHeart-tex/DALL-E-2.0-Image-Generation-Front-En
 npm install or yarn add
 ```
 
-3. Clone the backend repo
+3. Clone the backend repo. You can checkout the backend repository from <a href="https://github.com/BraveHeart-tex/DALL-E-2.0-Image-Generation-Back-End" target=_blank>here</a>.
 
 ```
 git clone https://github.com/BraveHeart-tex/DALL-E-2.0-Image-Generation-Back-End
@@ -43,9 +43,11 @@ git clone https://github.com/BraveHeart-tex/DALL-E-2.0-Image-Generation-Back-End
 4. Create a .env file in the root directory with the following variables. .env file should be created outside of both the server and the client folders.
 
 ```
-MONGO_URI=YOUR_MONGO_URI
-CLOUDINARY_URL=YOUR_CLOUDINARY_URL
-OPENAI_API_KEY=YOUR_OPENAI_API_KEY
+MONGODB_URL="YOUR URL"
+OPENAI_API_KEY="YOUR KEY"
+CLOUDINARY_CLOUD_NAME="YOUR CLOUD NAME"
+CLOUDINARY_API_KEY="YOUR API KEY"
+CLOUDINARY_API_SECRET="YOUR API SECRET"
 ```
 
 5. Start the application (in the server)
